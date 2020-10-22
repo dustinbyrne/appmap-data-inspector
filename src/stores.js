@@ -73,12 +73,18 @@ function createUrlStore() {
   return {
     subscribe,
     set: (url) => {
+      const {
+        protocol,
+        host,
+        pathname
+      } = window.location;
+      const baseUrl = protocol + host + pathname;
       if (url) {
         const params = new URLSearchParams();
         params.set('url', url);
-        window.location.search = params.toString();
+        window.history.replaceState(null, null, `/?${params.toString()}`);
       } else {
-        window.location.search = '';
+        window.history.replaceState(null, null, '/');
       }
 
       set(url);
