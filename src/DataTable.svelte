@@ -60,8 +60,7 @@
   }
 
   table {
-    margin: auto;
-    max-width: 100vw;
+    width: 100%;
     border-spacing: 0;
 
     th {
@@ -100,7 +99,7 @@
       padding: 1em;
       word-wrap: normal;
       word-break: break-word;
-      min-width: 100px;
+      text-align: center;
 
       .value {
         font-family: monospace;

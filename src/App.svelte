@@ -40,7 +40,6 @@
   }
 
   main {
-    padding: 0 1em;
     margin: 0 auto;
 
     header {
@@ -80,7 +79,7 @@
 
   @media (min-width: 640px) {
     main {
-      max-width: none;
+      max-width: 900px;
     }
   }
 </style>
