@@ -1,9 +1,11 @@
 <script>
   import DataTable from './DataTable.svelte';
   import AppMapSelector from './AppMapSelector.svelte';
+  import GitHubRibbon from './GitHubRibbon.svelte';
 </script>
 
 <main>
+  <GitHubRibbon url="https://github.com/dustinbyrne/appmap-data-inspector"/>
   <h1>AppMap Data Inspector</h1>
   <AppMapSelector></AppMapSelector>
   <DataTable></DataTable>
