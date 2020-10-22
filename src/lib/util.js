@@ -18,10 +18,9 @@ export function calculateEntropy(str) {
     memo[c] = memo[c] + 1 || 1;
     return memo;
   }, {});
-  const len = Object.values(chars).length;
+
   return Object.entries(chars).reduce((entropy, [c, count]) => {
     const freq = count / value.length;
-    console.log(`${freq} -> ${c}`);
     entropy += freq * Math.log2(freq);
     return entropy;
   }, 0) * -1;

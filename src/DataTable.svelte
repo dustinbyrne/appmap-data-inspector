@@ -4,26 +4,24 @@
   import { dataObjects as dataObjectStore } from './stores';
 
   let dataObjects = [];
-  dataObjectStore.subscribe(val => {
-    dataObjects = val;
-  });
+  dataObjectStore.subscribe(val => dataObjects = val);
 
   // let sortKey = 'entropy'
-  let sort = { key: 'entropy', ascending: false };
+  let sortOpts = { key: '', ascending: false };
   $: sortBy = (key) => {
-    if (key === sort.key) {
-      sort.ascending = !sort.ascending;
+    if (key === sortOpts.key) {
+      sortOpts.ascending = !sortOpts.ascending;
     }
-    sort.key = key;
-    dataObjects.sort(...sort);
+    sortOpts.key = key;
+    dataObjectStore.sort(sortOpts.key, sortOpts.ascending);
   };
 
   $: dataAttrSort = (key) => {
-    if (key !== sort.key) {
+    if (key !== sortOpts.key) {
       return null;
     }
 
-    return sort.ascending? 'ascending' : 'descending';
+    return sortOpts.ascending ? 'ascending' : 'descending';
   }
 </script>
 
