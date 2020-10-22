@@ -59,8 +59,8 @@
     margin-bottom: 1rem;
 
     .description {
-      &p {
-        margin-bottom: 0;
+      p {
+        margin-bottom: 0.5rem;
       }
     }
 
@@ -70,6 +70,10 @@
 
       &.active {
         display: block;
+      }
+
+      input[type="url"] {
+        min-width: 75vw;
       }
     }
   }
