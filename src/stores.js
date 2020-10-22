@@ -4,6 +4,10 @@ import { getLabels } from './rules';
 import { Labels } from './lib/labels';
 
 function getDataObjects(scenarioData) {
+  if (!scenarioData || !scenarioData.events) {
+    return [];
+  }
+
   const dataObjects = scenarioData.events
   .map(e => [e.parameters, e.message])
   .flat(2)
@@ -62,23 +66,61 @@ function getDataObjects(scenarioData) {
   }, {}));
 }
 
-function createDataObjectStore() {
-  const { subscribe, set, update } = writable([]);
+function createUrlStore() {
+  const initParams = new URLSearchParams(window.location.search);
+  const { subscribe, set, update } = writable(initParams.get('url'));
 
   return {
     subscribe,
-    url: async (url) => {
-      const data = await fetchJson(url);
-      set(getDataObjects(data));
+    set: (url) => {
+      if (url) {
+        const params = new URLSearchParams();
+        params.set('url', url);
+        window.location.search = params.toString();
+      } else {
+        window.location.search = '';
+      }
+
+      set(url);
     },
-    data: (data) => {
+  };
+}
+
+export const urlStore = createUrlStore();
+
+function createScenarioStore() {
+  const { subscribe, set, update } = writable({});
+
+  urlStore.subscribe(async (u) => {
+    if (u) {
+      const scenarioData = await fetchJson(u);
+      set(scenarioData);
+    }
+  });
+
+  return {
+    subscribe,
+    set: (data) => {
       let scenarioData = data;
       if (typeof scenarioData === 'string') {
         scenarioData = JSON.parse(data);
       }
-      debugger;
-      set(getDataObjects(scenarioData));
+      set(scenarioData);
     },
+  };
+}
+
+export const scenarioStore = createScenarioStore();
+
+function createDataObjectStore() {
+  const { subscribe, set, update } = writable([]);
+
+  scenarioStore.subscribe(async (scenarioData) => {
+    set(getDataObjects(scenarioData));
+  });
+
+  return {
+    subscribe,
     sort: (key, ascending) => {
       update((arr) => {
         arr.sort((a, b) => {
@@ -96,4 +138,4 @@ function createDataObjectStore() {
   };
 }
 
-export const dataObjects = createDataObjectStore();
+export const dataObjectStore = createDataObjectStore();

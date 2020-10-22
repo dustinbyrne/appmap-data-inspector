@@ -1,7 +1,7 @@
 
 <script>
   import LabelIcons from './LabelIcons.svelte';
-  import { dataObjects as dataObjectStore } from './stores';
+  import { dataObjectStore } from './stores';
 
   let dataObjects = [];
   dataObjectStore.subscribe(val => dataObjects = val);
@@ -99,7 +99,8 @@
     td {
       padding: 1em;
       word-wrap: normal;
-      word-break: break-all;
+      word-break: break-word;
+      min-width: 100px;
 
       .value {
         font-family: monospace;

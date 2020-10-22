@@ -1,8 +1,7 @@
 
 <script>
   import { onMount } from 'svelte';
-  import { dataObjects } from './stores';
-  import { getUrl } from './lib/util';
+  import { urlStore, scenarioStore } from './stores';
 
   let urlInputActive = false;
 
@@ -20,19 +19,21 @@
 
     uploadInput.addEventListener('change', async (e) => {
       const data = await uploadInput.files[0].text();
-      dataObjects.data(data);
+      scenarioStore.set(data);
+      urlStore.set(null);
     });
 
     urlButton.addEventListener('click', (e) => {
       urlInputActive = !urlInputActive;
-      if (urlInputActive) {
-        const url = getUrl();
-        if (url) {
-          urlInput.value = url;
-        }
-      }
       e.preventDefault();
     });
+
+    urlForm.addEventListener('submit', (e) => {
+      urlStore.set(urlInput.value);
+      e.preventDefault();
+    })
+
+    urlStore.subscribe(url => urlInput.value = url);
   });
 </script>
 
@@ -44,8 +45,8 @@
       <a href="#" id="url-btn">enter a URL</a>
     </p>
 
-    <form id="url-form" method="get" class="form-group {urlInputActive ? 'active' : ''}">
-      <input type="url" name="url" placeholder="https://" autocomplete="off">
+    <form id="url-form" class="form-group {urlInputActive ? 'active' : ''}">
+      <input type="url" placeholder="https://" autocomplete="off">
       <input type="submit" value="Load">
     </form>
 

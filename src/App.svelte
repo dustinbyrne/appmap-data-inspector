@@ -2,13 +2,28 @@
   import DataTable from './DataTable.svelte';
   import AppMapSelector from './AppMapSelector.svelte';
   import GitHubRibbon from './GitHubRibbon.svelte';
+  import ScenarioMetadata from './ScenarioMetadata.svelte';
+  import { dataObjectStore } from './stores';
+
+  let hasData = false;
+  dataObjectStore.subscribe(data => hasData = data && data.length > 0);
 </script>
 
+<GitHubRibbon url="https://github.com/dustinbyrne/appmap-data-inspector"/>
+
 <main>
-  <GitHubRibbon url="https://github.com/dustinbyrne/appmap-data-inspector"/>
-  <h1>AppMap Data Inspector</h1>
-  <AppMapSelector></AppMapSelector>
-  <DataTable></DataTable>
+  <header>
+    <h1>AppMap Data Inspector</h1>
+    <AppMapSelector />
+  </header>
+
+  {#if hasData}
+    <h2>Metadata</h2>
+    <ScenarioMetadata />
+
+    <h2>Data Summary</h2>
+    <DataTable />
+  {/if}
 </main>
 
 <footer>
@@ -25,9 +40,13 @@
   }
 
   main {
-    text-align: center;
-    padding: 1em;
+    padding: 0 1em;
     margin: 0 auto;
+
+    header {
+      text-align: center;
+      margin: 2rem;
+    }
   }
 
   footer {
@@ -45,6 +64,14 @@
     text-transform: uppercase;
     font-size: 3em;
     font-weight: 100;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    text-transform: uppercase;
+    font-weight: 100;
+    margin-bottom: 0.5rem;
+    color: #9c2fba;
   }
 
   ul {
