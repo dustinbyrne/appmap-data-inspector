@@ -1,0 +1,23 @@
+[
+  {
+    "kind": "bcrypt",
+    "labels": [
+      "credential",
+      "encrypted"
+    ],
+    "regex": "\\$2(a|b|x|y)\\$\\d+\\$[\\w\\d]{53}"
+  },
+  {
+    "kind": "password",
+    "labels": [
+      "credential"
+    ],
+    "regex": "(password|auth_token)",
+    "target": "name"
+  },
+  {
+    "kind": "random-hash",
+    "labels": [ "hex" ],
+    "regex": "^[a-fA-F0-9]{6,}"
+  }
+]

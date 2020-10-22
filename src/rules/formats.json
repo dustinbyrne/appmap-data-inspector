@@ -1,0 +1,22 @@
+[
+  {
+    "kind": "json",
+    "labels": [ "json", "known-format" ],
+    "regex": "^\\s?{\\s?\"[\\s\\w\\d]+\"\\s?:"
+  },
+  {
+    "kind": "html",
+    "labels": [ "html", "known-format" ],
+    "regex": "^\\s?<(\"[^\"]*\"|'[^']*'|[^'\">])*>"
+  },
+  {
+    "kind": "url",
+    "labels": [ "url", "known-format" ],
+    "regex": "^http(s?)://"
+  },
+  {
+    "kind": "console",
+    "labels": [ "stdout", "known-format" ],
+    "regex": "\\x1b\\[\\d{1,2}(m|b)"
+  }
+]
