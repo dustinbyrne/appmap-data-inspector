@@ -41,6 +41,7 @@
 
   main {
     margin: 0 auto;
+    margin-bottom: 3em;
 
     header {
       text-align: center;
