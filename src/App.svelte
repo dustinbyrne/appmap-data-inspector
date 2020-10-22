@@ -11,7 +11,14 @@
   <DataTable></DataTable>
 </main>
 
-<style>
+<footer>
+  <span>
+    For more information, check out
+    <a href="https://appland.org">appland.org</a>
+  </span>
+</footer>
+
+<style type="text/scss">
   html,
   body {
     background-color: #eaeaea;
@@ -20,8 +27,17 @@
   main {
     text-align: center;
     padding: 1em;
-    max-width: 240px;
     margin: 0 auto;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0;
+    padding: 0.5rem;
+    font-size: 12px;
+    background-color: #eaeaea;
+    width: 100%;
+    text-align: center;
   }
 
   h1 {
