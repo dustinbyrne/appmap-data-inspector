@@ -39,7 +39,7 @@
 <div class="appmap-selector">
   <div class="description">
     <p>
-      <a href="#" id="upload-btn">Upload an appmap</a>
+      <a href="#" id="upload-btn">Import an AppMap file</a>
       or
       <a href="#" id="url-btn">enter a URL</a>
     </p>
