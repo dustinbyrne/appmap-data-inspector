@@ -3,7 +3,7 @@ Analyze and label data objects captured in an AppMap JSON file. This is a proof 
 
 If you'd like to capture your own AppMap data, visit [appland.org](https://appland.org/#recording-clients). Data loaded into this application is never transmitted outside of your local browser.
 
-Demo available here: coming soon
+Demo available here: [https://appmap-data-inspector.netlify.app](https://appmap-data-inspector.netlify.app)
 
 ## Developing
 To run a local development server, run the following:
